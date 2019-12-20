@@ -10,7 +10,18 @@ export const defaultState = {
       name: 'To Do',
       id: 'G1',
       owner: 'U1'
+    },
+    {
+      name: 'Doing',
+      id: 'G2',
+      owner: 'U1'
+    },
+    {
+      name: 'Done',
+      id: 'G3',
+      owner: 'U1'
     }
+
   ],
   tasks: [
     {
