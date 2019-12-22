@@ -30,6 +30,20 @@ export const defaultState = {
       group: 'G1',
       owner: 'U1',
       isComplete: false
+    },
+    {
+      name: 'build app',
+      id: 'T2',
+      group: 'G2',
+      owner: 'U1',
+      isComplete: false
+    },
+    {
+      name: 'Take Shower',
+      id: 'T3',
+      group: 'G3',
+      owner: 'U1',
+      isComplete: false
     }
   ],
   comments: [
