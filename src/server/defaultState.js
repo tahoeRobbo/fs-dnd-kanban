@@ -32,6 +32,13 @@ export const defaultState = {
       isComplete: false
     },
     {
+      name: 'Walk Cats',
+      id: 'T4',
+      group: 'G1',
+      owner: 'U1',
+      isComplete: false
+    },
+    {
       name: 'build app',
       id: 'T2',
       group: 'G2',
