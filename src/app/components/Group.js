@@ -8,8 +8,12 @@ import Task from './Task'
 function Group ({ group }) {
   const { name, id } = group
   const tasksInGroup = useSelector( store => {
-    return store.tasks.filter((task) => task.group === id)
+    // return store.tasks.filter((task) => task.group === id)
+    const taskKeys = Object.keys(store.tasks)
+    return taskKeys.map((key) => store.tasks[key])
+      .filter((task) => task.group === id)
   })
+
   const dispatch = useDispatch()
 
 

@@ -4,8 +4,12 @@ import { useSelector } from 'react-redux'
 import Group from './Group'
 
 function Dashboard () {
-  const { users, groups, tasks, comments } = useSelector( state => state )
-  console.log('users, groups, tasks, comments', users, groups, tasks, comments)
+  const groups = useSelector( state => {
+    const groupKeys = Object.keys(state.groups)
+
+    return groupKeys.map((key) => state.groups[key])
+  })
+
   return (
     <>
       <h1>Dashboard</h1>
