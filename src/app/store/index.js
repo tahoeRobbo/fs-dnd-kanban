@@ -1,10 +1,9 @@
 import { createStore } from 'redux'
-import { defaultState} from '../../server/defaultState'
 
-function reducer (state = defaultState, action) {
-  return state
-}
+import rootReducer from '../reducers'
+import middleware from '../middleware'
 
 export const store = createStore(
-  reducer
+  rootReducer,
+  middleware
 )

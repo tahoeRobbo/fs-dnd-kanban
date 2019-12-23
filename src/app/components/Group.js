@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { updateTaskGroup } from '../actions/tasks-actions'
 
 import Task from './Task'
 
@@ -9,6 +10,8 @@ function Group ({ group }) {
   const tasksInGroup = useSelector( store => {
     return store.tasks.filter((task) => task.group === id)
   })
+  const dispatch = useDispatch()
+
 
   const handleDragOver = (e) => {
     e.preventDefault()
@@ -18,6 +21,7 @@ function Group ({ group }) {
     const id = e.dataTransfer.getData('id')
     console.log('task from handleDrop', id)
     console.log('group.id', group.id)
+    dispatch(updateTaskGroup(id, group.id))
   }
 
   return (
