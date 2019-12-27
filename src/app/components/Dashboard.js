@@ -2,13 +2,10 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import Group from './Group'
+import AddTodo from './AddTodo'
 
 function Dashboard () {
-  const groups = useSelector( state => {
-    const groupKeys = Object.keys(state.groups)
-
-    return groupKeys.map((key) => state.groups[key])
-  })
+  const { groups } = useSelector(store => store)
 
   return (
     <>
@@ -18,6 +15,7 @@ function Dashboard () {
           <Group key={group.id} group={group} />
         ))}
       </div>
+      <AddTodo />
     </>
   )
 }
