@@ -1,12 +1,16 @@
 import React from 'react'
-import { Provider } from 'react-redux'
+import { Provider, useDispatch } from 'react-redux'
 import { store } from '../store'
+
+import { getInitialData } from '../actions/shared'
 
 import Dashboard from './Dashboard'
 
-console.log('store.getState()', store.getState())
-
 function App () {
+  const dispatch = useDispatch()
+  React.useEffect(() => {
+    dispatch(getInitialData())
+  }, [])
 
   return (
     <Provider store={store}>
