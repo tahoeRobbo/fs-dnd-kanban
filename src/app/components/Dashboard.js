@@ -9,7 +9,6 @@ function Dashboard () {
 
   return (
     <>
-      <h1>Dashboard</h1>
       <div className='flex flex-row justify-between'>
         {groups.map((group) => (
           <Group key={group.id} group={group} />

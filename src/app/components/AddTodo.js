@@ -22,7 +22,6 @@ function AddTodo () {
 
   return (
     <>
-      <h2>Add Task</h2>
       <form onSubmit={handleSubmit}>
         <input
           value={text}
@@ -30,9 +29,10 @@ function AddTodo () {
           placeholder='Add a task'
           type='text'
           name='task'
-          className='border border-blue-400'
+          autoComplete='off'
+          className='border border-blue-400 mt-4'
         />
-        <button>Add</button>
+        <button className='ml-2 bg-blue-400 px-3 rounded text-white'>Add</button>
       </form>
     </>
   )
