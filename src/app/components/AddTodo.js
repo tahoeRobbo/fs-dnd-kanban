@@ -1,8 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 
-import { formatNewTask } from '../utils/helpers'
-import { addTask } from '../actions/tasks-actions'
+import { handleAddTask } from '../actions/tasks-actions'
 
 function AddTodo () {
   const [text, setText] = React.useState('')
@@ -15,8 +14,7 @@ function AddTodo () {
 
   function handleSubmit (e) {
     e.preventDefault()
-    const formattedTask = formatNewTask(text)
-    dispatch(addTask(formattedTask))
+    dispatch(handleAddTask(text))
     setText('')
   }
 

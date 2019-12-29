@@ -10,10 +10,6 @@ const app = express()
 
 app.listen(port, () => console.log(`server listening on port ${port}`))
 
-// app.get('/', (req, res) => {
-//   res.send('Hello World')
-// })
-
 export async function addNewTask (name) {
   let db = await connectDB()
   let collection = db.collection('tasks')
@@ -23,7 +19,7 @@ export async function addNewTask (name) {
 }
 
 app.use(
-  cors,
+  cors(),
   bodyParser.urlencoded({extended: true}),
   bodyParser.json()
 )
@@ -66,3 +62,4 @@ app.post('/task/update', async (req, res) => {
   await updateTask(task)
   res.status(200).send()
 })
+

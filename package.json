@@ -7,7 +7,7 @@
     "build": "NODE_ENV='production' && webpack",
     "start": "concurrently \"npm run serve\" \"npm run dev\"",
     "dev": "webpack-dev-server",
-    "serve": "babel-node src/server/server",
+    "serve": "nodemon src/server/server --exec babel-node",
     "initialize-db": "babel-node src/server/initialize-db",
     "purge-db": "babel-node src/server/purge-db",
     "reset-db": "npm run purge-db && npm run initialize-db",
