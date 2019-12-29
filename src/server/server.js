@@ -18,6 +18,11 @@ export async function addNewTask (name) {
   return formattedTask
 }
 
+export async function getCollectionData (collectionName) {
+  let db = await connectDB()
+  return db.collection(collectionName).find({}).toArray()
+}
+
 app.use(
   cors(),
   bodyParser.urlencoded({extended: true}),
@@ -50,6 +55,18 @@ export async function updateTask (task) {
 
   return task
 }
+
+app.get('/groups', async (req, res) => {
+  await getCollectionData('groups')
+    .then((groups) => res.send(groups))
+    .catch((err) => res.send((err)))
+})
+
+app.get('/tasks', async (req, res) => {
+  await getCollectionData('tasks')
+  .then((tasks) => res.send(tasks))
+  .catch((err) => res.send((err)))
+})
 
 app.post('/task/new', async (req, res) => {
   let { taskName } = req.body

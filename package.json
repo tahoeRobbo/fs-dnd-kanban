@@ -11,7 +11,8 @@
     "initialize-db": "babel-node src/server/initialize-db",
     "purge-db": "babel-node src/server/purge-db",
     "reset-db": "npm run purge-db && npm run initialize-db",
-    "server-test": "babel-node src/server/server.spec"
+    "server-test": "babel-node src/server/test/server.spec",
+    "get-data-test": "babel-node src/server/test/getData.spec"
   },
   "keywords": [
     "react",
