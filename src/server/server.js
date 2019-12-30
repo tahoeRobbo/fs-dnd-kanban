@@ -4,6 +4,9 @@ import bodyParser from 'body-parser'
 import { connectDB } from './connect-db'
 import { formatNewTask } from './utils/helpers'
 
+import tasksRouter from './routes/task-routes'
+import groupsRouter from './routes/group-routes'
+
 const port = process.env.PORT || 8888
 
 const app = express()
@@ -57,26 +60,6 @@ export async function updateTask (task) {
   return task
 }
 
-app.get('/groups', async (req, res) => {
-  await getCollectionData('groups')
-    .then((groups) => res.send(groups))
-    .catch((err) => res.send((err)))
-})
-
-app.get('/tasks', async (req, res) => {
-  await getCollectionData('tasks')
-    .then((tasks) => res.send(tasks))
-    .catch((err) => res.send((err)))
-})
-
-app.post('/task/new', async (req, res) => {
-  const { taskName } = req.body
-  const formattedTask = await addNewTask(taskName)
-  res.status(200).send(formattedTask)
-})
-
-app.post('/task/update', async (req, res) => {
-  const { task } = req.body
-  await updateTask(task)
-  res.status(200).send(task)
-})
+app.use('/', tasksRouter)
+app.use('/', groupsRouter)
+app.use('/task', tasksRouter)
