@@ -19,8 +19,5 @@ async function testGetData () {
 }
 
 testGetData()
-  .then(() => {console.log('testGetData SUCCESS'); process.exit()})
-  .catch((err) => {console.log(`testGetData FAIL, ${err}`); process.exit()})
-
-
-
+  .then(() => { console.log('testGetData SUCCESS'); process.exit() })
+  .catch((err) => { console.log(`testGetData FAIL, ${err}`); process.exit() })

@@ -7,7 +7,7 @@ import Task from './Task'
 
 function Group ({ group }) {
   const { name, id } = group
-  const {tasks} = useSelector(store => store)
+  const { tasks } = useSelector(store => store)
   const dispatch = useDispatch()
 
   const tasksInGroup = tasks.filter((task) => task.group === id)

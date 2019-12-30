@@ -8,7 +8,7 @@ function AddTodo () {
   const dispatch = useDispatch()
 
   const handleInputChange = (e) => {
-    e.preventDefault
+    e.preventDefault()
     setText(e.target.value)
   }
 

@@ -25,7 +25,7 @@ export async function getCollectionData (collectionName) {
 
 app.use(
   cors(),
-  bodyParser.urlencoded({extended: true}),
+  bodyParser.urlencoded({ extended: true }),
   bodyParser.json()
 )
 
@@ -34,11 +34,11 @@ export async function updateTask (task) {
   const collection = await connectDB().collection('tasks')
 
   if (group) {
-    await collection.updateOne({id}, {$set:{group}})
+    await collection.updateOne({ id }, { $set: { group } })
   }
 
   if (name) {
-    await collection.updateOne({id}, {$set:{name}})
+    await collection.updateOne({ id }, { $set: { name } })
   }
 
   if (isComplete !== undefined) {
