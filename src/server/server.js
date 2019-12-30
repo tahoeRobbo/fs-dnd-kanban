@@ -4,22 +4,22 @@ import bodyParser from 'body-parser'
 import { connectDB } from './connect-db'
 import { formatNewTask } from './utils/helpers'
 
-let port = 8888
+const port = process.env.PORT || 8888
 
 const app = express()
 
 app.listen(port, () => console.log(`server listening on port ${port}`))
 
 export async function addNewTask (name) {
-  let db = await connectDB()
-  let collection = db.collection('tasks')
-  let formattedTask = formatNewTask(name)
+  const db = await connectDB()
+  const collection = db.collection('tasks')
+  const formattedTask = formatNewTask(name)
   await collection.insertOne(formattedTask)
   return formattedTask
 }
 
 export async function getCollectionData (collectionName) {
-  let db = await connectDB()
+  const db = await connectDB()
   return db.collection(collectionName).find({}).toArray()
 }
 
@@ -30,8 +30,8 @@ app.use(
 )
 
 export async function updateTask (task) {
-  let { id, name, group, isComplete } = task
-  let collection = await connectDB().collection('tasks')
+  const { id, name, group, isComplete } = task
+  const collection = await connectDB().collection('tasks')
 
   if (group) {
     await collection.updateOne({id}, {$set:{group}})
@@ -42,15 +42,16 @@ export async function updateTask (task) {
   }
 
   if (isComplete !== undefined) {
-    let completed = Date.now()
+    const completed = Date.now()
     await collection.updateOne(
-      {id},
-      {$set: {
+      { id },
+      {
+        $set: {
           isComplete,
           completed
         }
       })
-      .then(() => task.completed = completed)
+      .then(() => { task.completed = completed })
   }
 
   return task
@@ -64,19 +65,18 @@ app.get('/groups', async (req, res) => {
 
 app.get('/tasks', async (req, res) => {
   await getCollectionData('tasks')
-  .then((tasks) => res.send(tasks))
-  .catch((err) => res.send((err)))
+    .then((tasks) => res.send(tasks))
+    .catch((err) => res.send((err)))
 })
 
 app.post('/task/new', async (req, res) => {
-  let { taskName } = req.body
-  let formattedTask = await addNewTask(taskName)
+  const { taskName } = req.body
+  const formattedTask = await addNewTask(taskName)
   res.status(200).send(formattedTask)
 })
 
 app.post('/task/update', async (req, res) => {
-  let { task } = req.body
+  const { task } = req.body
   await updateTask(task)
   res.status(200).send(task)
 })
-

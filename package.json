@@ -53,6 +53,7 @@
     "mongodb": "^3.1.10",
     "postcss": "^7.0.25",
     "postcss-loader": "^3.0.0",
+    "standard": "^14.3.1",
     "style-loader": "^1.1.1",
     "webpack": "^4.41.3",
     "webpack-cli": "^3.3.10",
