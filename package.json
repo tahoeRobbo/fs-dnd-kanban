@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "build": "NODE_ENV='production' && webpack",
-    "start": "webpack-dev-server",
-    "serve": "babel-node src/server/server",
+    "start": "concurrently \"npm run serve\" \"npm run dev\"",
+    "dev": "webpack-dev-server",
+    "serve": "nodemon src/server/server --exec babel-node",
     "initialize-db": "babel-node src/server/initialize-db",
     "purge-db": "babel-node src/server/purge-db",
     "reset-db": "npm run purge-db && npm run initialize-db",
-    "server-test": "babel-node src/server/server.spec"
+    "server-test": "babel-node src/server/test/server.spec",
+    "get-data-test": "babel-node src/server/test/getData.spec"
   },
   "keywords": [
     "react",
@@ -43,6 +45,7 @@
     "@babel/preset-react": "^7.7.4",
     "babel-loader": "^8.0.6",
     "body-parser": "^1.19.0",
+    "concurrently": "^5.0.2",
     "cors": "^2.8.5",
     "css-loader": "^3.4.0",
     "express": "^4.17.1",

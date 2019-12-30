@@ -1,16 +1,30 @@
-// export function handleChangeTaskGroup (taskId) => {
-//   return (dispatch) => {
-//
-//   }
-// }
-export const UPDATE_TASK_GROUP = 'UPDATE_TASK_GROUP'
+import { postNewTask, postUpdateTask } from '../utils/api'
+
+export const UPDATE_TASK = 'UPDATE_TASK'
 export const ADD_TASK = 'ADD_TASK'
 
-export function updateTaskGroup (taskId, groupId) {
+export function handleUpdateTask (task) {
+  return (dispatch) => {
+    postUpdateTask(task)
+      .then((res) => res.json())
+      .then((task) => dispatch(updateTask(task)))
+      .catch((err) => console.log(`Failed to update task, ${err}`))
+  }
+}
+
+function updateTask (task) {
   return {
-    type: UPDATE_TASK_GROUP,
-    taskId,
-    groupId
+    type: UPDATE_TASK,
+    task
+  }
+}
+
+export function handleAddTask (name) {
+  return (dispatch) => {
+    postNewTask(name)
+      .then((res) => res.json())
+      .then((task) => dispatch(addTask(task)))
+      .catch((err) => console.log(`Failed to post new task, ${err}`))
   }
 }
 

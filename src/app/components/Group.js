@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
-import { updateTaskGroup } from '../actions/tasks-actions'
+import { handleUpdateTask } from '../actions/tasks-actions'
 
 import Task from './Task'
 
@@ -18,7 +18,11 @@ function Group ({ group }) {
 
   const handleDrop = (e) => {
     const id = e.dataTransfer.getData('id')
-    dispatch(updateTaskGroup(id, group.id))
+    const task = {
+      id,
+      group: group.id
+    }
+    dispatch(handleUpdateTask({ task }))
   }
 
   return (
