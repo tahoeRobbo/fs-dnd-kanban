@@ -12,7 +12,6 @@ export function handleGetInitialData() {
 }
 
 function setInitialData (data) {
-  console.log('data from getInitialData', data)
   return {
     type: SET_INITIAL_DATA,
     data

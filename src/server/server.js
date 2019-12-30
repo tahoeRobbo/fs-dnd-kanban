@@ -77,6 +77,6 @@ app.post('/task/new', async (req, res) => {
 app.post('/task/update', async (req, res) => {
   let { task } = req.body
   await updateTask(task)
-  res.status(200).send()
+  res.status(200).send(task)
 })
 

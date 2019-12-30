@@ -28,3 +28,17 @@ export function postNewTask (name) {
     body: payload
   })
 }
+
+export function postUpdateTask (task) {
+  console.log('task inside postUpdateTask', task)
+  const payload = JSON.stringify(task)
+  return fetch(`${url}/task/update`, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: payload
+  })
+
+}
