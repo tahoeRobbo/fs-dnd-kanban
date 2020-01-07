@@ -6,6 +6,7 @@ import { formatNewTask } from './utils/helpers'
 
 import tasksRouter from './routes/task-routes'
 import groupsRouter from './routes/group-routes'
+import authRouter from './routes/auth-routes'
 
 const port = process.env.PORT || 8888
 
@@ -63,3 +64,4 @@ export async function updateTask (task) {
 app.use('/', tasksRouter)
 app.use('/', groupsRouter)
 app.use('/task', tasksRouter)
+app.use('/auth', authRouter)

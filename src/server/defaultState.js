@@ -1,8 +1,11 @@
+import bcrypt from 'bcrypt'
+
 export const defaultState = {
   users: [
     {
       name: 'Rob',
-      id: 'U1'
+      id: 'U1',
+      password: bcrypt.hashSync('grateful', 10)
     }
   ],
   groups: [

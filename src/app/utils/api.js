@@ -40,3 +40,14 @@ export function postUpdateTask (task) {
     body: payload
   })
 }
+
+export function getAuth (credentials) {
+  return window.fetch(`${url}/auth`, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(credentials)
+  })
+}

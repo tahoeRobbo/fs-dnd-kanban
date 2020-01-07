@@ -14,7 +14,8 @@
     "purge-db": "babel-node src/server/purge-db",
     "reset-db": "npm run purge-db && npm run initialize-db",
     "server-test": "babel-node src/server/test/server.spec",
-    "get-data-test": "babel-node src/server/test/getData.spec"
+    "get-data-test": "babel-node src/server/test/getData.spec",
+    "auth-test": "babel-node src/server/test/auth.spec"
   },
   "keywords": [
     "react",

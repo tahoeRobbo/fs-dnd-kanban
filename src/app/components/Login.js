@@ -1,15 +1,23 @@
 import React from 'react'
-import { useDispatch} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { handleLogin } from '../actions/auth-actions'
 
 function Login () {
   const [username, setUsername] = React.useState('')
   const [password, setPassword] = React.useState('')
+  const history = useHistory()
   const dispatch = useDispatch()
+  const user = useSelector(state => state.users)
+
+  React.useEffect(() => {
+    if (user.authed) {
+      history.push('/')
+    }
+  }, [user])
 
   function handleSubmit (e) {
     e.preventDefault()
-    console.log('e', e.target)
     dispatch(handleLogin({
       username,
       password
