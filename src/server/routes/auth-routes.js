@@ -19,7 +19,6 @@ authRouter.route('/')
   .post( async (req, res) => {
     const user = await getUserData(req.body.username)
     const authed = await checkAuth(req.body.password, user.password)
-    console.log('authed', authed)
     if (authed) {
       delete user.password
       return res.send({

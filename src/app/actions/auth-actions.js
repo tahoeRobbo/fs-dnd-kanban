@@ -1,5 +1,4 @@
 import { getAuth } from '../utils/api'
-import { useHistory } from 'react-router-dom'
 
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
