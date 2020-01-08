@@ -6,13 +6,16 @@
   "scripts": {
     "build": "NODE_ENV='production' && webpack",
     "start": "concurrently \"npm run serve\" \"npm run dev\"",
+    "lint": "standard",
+    "lint:fix": "standard --fix",
     "dev": "webpack-dev-server",
     "serve": "nodemon src/server/server --exec babel-node",
     "initialize-db": "babel-node src/server/initialize-db",
     "purge-db": "babel-node src/server/purge-db",
     "reset-db": "npm run purge-db && npm run initialize-db",
     "server-test": "babel-node src/server/test/server.spec",
-    "get-data-test": "babel-node src/server/test/getData.spec"
+    "get-data-test": "babel-node src/server/test/getData.spec",
+    "auth-test": "babel-node src/server/test/auth.spec"
   },
   "keywords": [
     "react",
@@ -30,6 +33,7 @@
     ]
   },
   "dependencies": {
+    "bcrypt": "^3.0.7",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-redux": "^7.1.3",
@@ -53,9 +57,21 @@
     "mongodb": "^3.1.10",
     "postcss": "^7.0.25",
     "postcss-loader": "^3.0.0",
+    "standard": "^14.3.1",
     "style-loader": "^1.1.1",
     "webpack": "^4.41.3",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+      "node_modules/**/node_modules"
+    ],
+    "delay": "2500",
+    "env": {
+      "NODE_ENV": "development",
+      "PORT": 8888
+    }
   }
 }

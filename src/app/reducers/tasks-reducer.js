@@ -1,5 +1,6 @@
 import { ADD_TASK, UPDATE_TASK } from '../actions/tasks-actions'
 import { SET_INITIAL_DATA } from '../actions/shared'
+let keys
 
 export default function tasksReducer (state = [], action) {
   switch (action.type) {
@@ -9,12 +10,12 @@ export default function tasksReducer (state = [], action) {
       return state.concat([action.task])
 
     case UPDATE_TASK:
-      let keys = Object.keys(action.task)
+      keys = Object.keys(action.task)
       return state.map((task) => {
         if (task.id !== action.task.id) {
           return task
         }
-        let updates = {}
+        const updates = {}
         keys.forEach((key) => {
           updates[key] = action.task[key]
         })
