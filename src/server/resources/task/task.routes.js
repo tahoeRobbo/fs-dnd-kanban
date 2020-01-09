@@ -1,16 +1,15 @@
 import express from 'express'
-import { getCollectionData, updateTask } from '../../server'
 import { taskController } from './task.controller'
 
-const tasksRouter = express.Router()
+const taskRouter = express.Router()
 
-tasksRouter
+taskRouter
   .route('/')
   .get(taskController.getTasks)
   .post(taskController.postTask)
 
-tasksRouter
+taskRouter
   .route('/update')
   .post(taskController.postTaskUpdate)
 
-export default tasksRouter
+export default taskRouter

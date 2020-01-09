@@ -3,9 +3,9 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
 import { connectDB } from './connect-db'
-import { formatNewTask } from './utils/helpers'
-import tasksRouter from './resources/task/task.routes'
-import groupsRouter from './routes/group-routes'
+
+import taskRouter from './resources/task/task.routes'
+import groupRouter from './resources/group/group.routes'
 import authRouter from './routes/auth-routes'
 
 const port = process.env.PORT || 8888
@@ -24,8 +24,8 @@ app.use(
   morgan('dev')
 )
 
-app.use('/api/group', groupsRouter)
-app.use('/api/task', tasksRouter)
+app.use('/api/group', groupRouter)
+app.use('/api/task', taskRouter)
 app.use('/auth', authRouter)
 
 app.listen(port, () => console.log(`server listening on port ${port}`))
