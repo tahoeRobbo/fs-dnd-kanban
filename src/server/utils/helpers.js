@@ -9,6 +9,6 @@ export function formatNewTask (name) {
   }
 }
 
-function generateId () {
+export function generateId () {
   return Math.random().toString(16).substr(2, 10)
 }

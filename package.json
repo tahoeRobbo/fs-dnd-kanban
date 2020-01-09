@@ -40,7 +40,8 @@
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "tailwindcss": "^1.1.4"
+    "tailwindcss": "^1.1.4",
+    "prop-types": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.7.5",
@@ -55,6 +56,7 @@
     "express": "^4.17.1",
     "html-webpack-plugin": "^3.2.0",
     "mongodb": "^3.1.10",
+    "morgan": "^1.9.1",
     "postcss": "^7.0.25",
     "postcss-loader": "^3.0.0",
     "standard": "^14.3.1",
