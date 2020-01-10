@@ -3,9 +3,9 @@ import bcrypt from 'bcrypt'
 export const defaultState = {
   users: [
     {
-      name: 'Rob',
+      name: 'Dev',
       id: 'U1',
-      password: bcrypt.hashSync('grateful', 10)
+      password: bcrypt.hashSync('test', 10)
     }
   ],
   groups: [
@@ -32,6 +32,7 @@ export const defaultState = {
       id: 'T1',
       group: 'G1',
       owner: 'U1',
+      created: Date.now(),
       isComplete: false
     },
     {
@@ -39,6 +40,7 @@ export const defaultState = {
       id: 'T2',
       group: 'G2',
       owner: 'U1',
+      created: Date.now(),
       isComplete: false
     },
     {
@@ -46,6 +48,7 @@ export const defaultState = {
       id: 'T3',
       group: 'G3',
       owner: 'U1',
+      created: Date.now(),
       isComplete: false
     }
   ],
