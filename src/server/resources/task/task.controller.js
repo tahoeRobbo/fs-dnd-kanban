@@ -42,6 +42,7 @@ function formatNewTask (name) {
     group: 'G1',
     owner: 'U1', // todo update once auth implemented,
     created: Date.now(),
+    completed: null,
     isComplete: false
   }
 }
@@ -76,7 +77,7 @@ export async function updateTask (task) {
           completed
         }
       })
-    .then(() => { task.completed = completed })
+      .then(() => { task.completed = completed })
   }
 
   return task

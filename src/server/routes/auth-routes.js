@@ -14,7 +14,6 @@ async function checkAuth (password, hash) {
   return bcrypt.compare(password, hash)
 }
 
-
 authRouter.route('/')
   .post( async (req, res) => {
     const user = await getUserData(req.body.username)
