@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "build": "NODE_ENV='production' && webpack",
-    "start": "concurrently \"npm run serve\" \"npm run dev\"",
+    "start": "concurrently \"npm run dev-server\" \"npm run dev\"",
     "lint": "standard",
     "lint:fix": "standard --fix",
     "dev": "webpack-dev-server",
-    "serve": "nodemon src/server/server --exec babel-node",
+    "build-server": "babel src/server --out-dir dist/server",
+    "start-server": "node dist/server/index.js",
+    "restart-server": "rimraf /dist/server && npm run build-server && npm run start-server",
+    "dev-server": "nodemon -V --exec npm run restart-server",
     "initialize-db": "babel-node src/server/initialize-db",
     "purge-db": "babel-node src/server/purge-db",
     "reset-db": "npm run purge-db && npm run initialize-db",
@@ -28,7 +31,12 @@
   "license": "ISC",
   "babel": {
     "presets": [
-      "@babel/preset-env",
+      ["@babel/preset-env", {
+        "targets": {
+          "node": "current"
+        }
+      }
+      ],
       "@babel/preset-react"
     ]
   },
@@ -45,10 +53,12 @@
     "tailwindcss": "^1.1.4"
   },
   "devDependencies": {
+    "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.5",
     "@babel/node": "^7.7.4",
     "@babel/preset-env": "^7.7.6",
     "@babel/preset-react": "^7.7.4",
+    "babel-core": "^6.26.3",
     "babel-loader": "^8.0.6",
     "body-parser": "^1.19.0",
     "concurrently": "^5.0.2",
@@ -69,7 +79,8 @@
   "nodemonConfig": {
     "restartable": "rs",
     "ignore": [
-      "node_modules/**/node_modules"
+      "node_modules/**/node_modules",
+      "dist"
     ],
     "delay": "2500",
     "env": {
