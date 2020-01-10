@@ -6,19 +6,15 @@ const taskSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  id: {
-    type: Number,
-    required: true
-  },
   group: {
-    type: String,
-    required: true,
-    trim: true
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'group',
+    required: true
   },
   owner: {
     type: mongoose.SchemaType.ObjectId,
-    required: true,
-    ref: 'user'
+    ref: 'user',
+    required: true
   },
   created: {
     type: Date,
