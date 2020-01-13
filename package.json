@@ -31,17 +31,20 @@
   "license": "ISC",
   "babel": {
     "presets": [
-      ["@babel/preset-env", {
-        "targets": {
-          "node": "current"
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
         }
-      }
       ],
       "@babel/preset-react"
     ]
   },
   "dependencies": {
     "bcrypt": "^3.0.7",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.6",
     "prop-types": "latest",
     "react": "^16.12.0",

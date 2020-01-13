@@ -1,5 +1,6 @@
 const env = process.env.NODE_ENV || 'development'
 
+
 const baseConfig = {
   env,
   isDev: env === 'development',
@@ -7,7 +8,7 @@ const baseConfig = {
   port: process.env.PORT || 3000,
   secrets: {
     jwt: process.env.JWT_SECRET,
-    jwtExp: '5d'
+    jwtExp: process.env.JWT_EXP
   }
 }
 

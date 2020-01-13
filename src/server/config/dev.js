@@ -1,6 +1,7 @@
 export const config = {
   secrets: {
-    jwt: 'dragitdropit'
+    jwt: 'dragitdropit',
+    jwtExp: '5d'
   },
   dbUrl: 'mongodb://localhost:27017/dndtasks'
 }

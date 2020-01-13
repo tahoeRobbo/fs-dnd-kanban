@@ -7,7 +7,9 @@ import { connectMongoose } from './connect-mongoose'
 
 import taskRouter from './resources/task/task.routes'
 import groupRouter from './resources/group/group.routes'
-import authRouter from './routes/auth-routes'
+import userRouter from './resources/user/user.routes'
+
+import { protect, signin, signup } from './utils/auth'
 
 const port = process.env.PORT || 8001
 
@@ -20,9 +22,13 @@ app.use(
   morgan('dev')
 )
 
+app.use('/signup', signup)
+app.use('/signin', signin)
+
+app.use('/api', protect)
 app.use('/api/group', groupRouter)
 app.use('/api/task', taskRouter)
-app.use('/auth', authRouter)
+app.use('api/user', userRouter)
 
 export async function start () {
   try {
