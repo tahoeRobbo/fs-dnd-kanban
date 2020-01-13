@@ -6,7 +6,7 @@ export const getOne = model => async (req, res) => {
       .exec()
 
     if (!doc) {
-      return res.status(400).end()
+      return res.status(404).end()
     }
 
     return res.status(200).json({ data: doc })
@@ -57,6 +57,7 @@ const updateOne = model => async (req, res) => {
     const updatedDoc = await model
       .findOneAndUpdate(
         { _id: req.params.id },
+        req.body,
         { new: true }
       )
       .lean()

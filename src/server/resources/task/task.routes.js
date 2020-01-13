@@ -1,6 +1,6 @@
 import express from 'express'
-import { taskController, taskCrudControllers } from './task.controller'
-import { formatNewTask } from './task.middleware'
+import { taskCrudControllers } from './task.controller'
+import { addCompletedTime, formatNewTask } from './task.middleware'
 
 const taskRouter = express.Router()
 
@@ -12,7 +12,7 @@ taskRouter
 taskRouter
   .route('/:id')
   .get(taskCrudControllers.getOne)
-  .put(taskController.postTaskUpdate)
+  .put(addCompletedTime, taskCrudControllers.updateOne)
   .delete(taskCrudControllers.removeOne)
 
 export default taskRouter

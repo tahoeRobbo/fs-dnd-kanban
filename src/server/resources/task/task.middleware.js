@@ -13,3 +13,15 @@ export function formatNewTask (req, res, next) {
 
   next()
 }
+
+export function addCompletedTime (req, res, next) {
+  const { isComplete } = req.body
+
+  if (isComplete === true) {
+    req.body.completed = Date.now()
+  } else {
+    req.body.completed = null
+  }
+
+  next()
+}
