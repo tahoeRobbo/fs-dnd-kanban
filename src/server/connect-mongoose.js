@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
+import config from '../server/config'
 
-const url = 'mongodb://localhost:27017/dndtasks'
+const url = config.dbUrl
 const options = {
   useFindAndModify: false,
   useNewUrlParser: true,
