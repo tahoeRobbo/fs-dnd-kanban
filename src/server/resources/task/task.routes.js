@@ -11,6 +11,8 @@ taskRouter
 
 taskRouter
   .route('/:id')
-  .post(taskController.postTaskUpdate)
+  .get(taskCrudControllers.getOne)
+  .put(taskController.postTaskUpdate)
+  .delete(taskCrudControllers.removeOne)
 
 export default taskRouter

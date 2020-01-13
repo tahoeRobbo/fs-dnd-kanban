@@ -76,7 +76,7 @@ const updateOne = model => async (req, res) => {
 export const removeOne = model => async (req, res) => {
   try {
     const removed = await model
-      .findOneAndRemove({ _id: req.params._id })
+      .findOneAndRemove({ _id: req.params.id })
       .exec()
 
     if (!removed) {
