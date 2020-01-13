@@ -1,15 +1,16 @@
 import express from 'express'
-import { taskController } from './task.controller'
+import { taskController, taskCrudControllers } from './task.controller'
+import { formatNewTask } from './task.middleware'
 
 const taskRouter = express.Router()
 
 taskRouter
   .route('/')
-  .get(taskController.getTasks)
-  .post(taskController.postTask)
+  .get(taskCrudControllers.getMany)
+  .post(formatNewTask, taskCrudControllers.createOne)
 
 taskRouter
-  .route('/update')
+  .route('/:id')
   .post(taskController.postTaskUpdate)
 
 export default taskRouter

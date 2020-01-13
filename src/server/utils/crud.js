@@ -1,7 +1,7 @@
 export const getOne = model => async (req, res) => {
   try {
     const doc = await model
-      .findOne({_id: req.params.id })
+      .findOne({ _id: req.params.id })
       .lean()
       .exec()
 
@@ -19,7 +19,8 @@ export const getOne = model => async (req, res) => {
 export const getMany = model => async (req, res) => {
   try {
     const docs = await model
-      .find({ owner: req.user._id })
+      // .find({ owner: req.user._id }) // todo add with auth
+      .find({})
       .lean()
       .exec()
 
@@ -35,9 +36,10 @@ export const getMany = model => async (req, res) => {
 }
 
 export const createOne = model => async (req, res) => {
-  const owner = req.user._id
+  // const owner = req.user._id
   try {
-    const doc = await model.create({ ...req.body, owner })
+    // const doc = await model.create({ ...req.body, owner })
+    const doc = await model.create({ ...req.body })
 
     if (!doc) {
       return res.status(400).end()
