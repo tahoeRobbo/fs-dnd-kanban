@@ -1,10 +1,7 @@
-import bcrypt from 'bcrypt'
-import mongoose from 'mongoose'
-
 export const devUser = [
   {
     name: 'Dev',
-    password: bcrypt.hashSync('test', 10)
+    password: 'test'
   }
 ]
 
