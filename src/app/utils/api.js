@@ -41,8 +41,8 @@ export function postUpdateTask (task) {
   })
 }
 
-export function getAuth (credentials) {
-  return window.fetch(`${url}/auth`, {
+export function signin (credentials) {
+  return window.fetch(`${url}/signin`, {
     method: 'POST',
     mode: 'cors',
     headers: {

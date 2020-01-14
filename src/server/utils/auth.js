@@ -21,7 +21,7 @@ function verifyToken (token) {
 }
 
 export async function signup (req, res) {
-  if (!req.body.name || !req.body.password) {
+  if (!req.body.username || !req.body.password) {
     return res.status(400).json({ message: 'Must have username and password'})
   }
 
@@ -35,24 +35,29 @@ export async function signup (req, res) {
 }
 
 export async function signin (req, res) {
-  if (!req.body.name || !req.body.password) {
+  if (!req.body.username || !req.body.password) {
     return res.status(400).send({ message: 'Must have username and password' })
   }
 
   try {
-    const user = await User.findOne({ name: req.body.name })
-      .select('name password')
+    const user = await User.findOne({ username: req.body.username })
+      .select('username password')
       .exec()
 
     const match = await user.checkPassword(req.body.password)
 
     if (!match) {
-      return res.status(401).json({ message: 'Invalid email and password combination' })
+      return res.status(401).json({ message: 'Invalid username and password combination' })
     }
 
     const token = newToken(user)
-    return res.status(200).send({ token })
+    user.password = undefined
+    return res.status(200).send({
+      user,
+      token
+    })
   } catch (e) {
+    console.error(e)
     res.status(500).end()
   }
 }

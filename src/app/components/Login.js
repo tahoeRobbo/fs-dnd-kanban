@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { handleLogin } from '../actions/auth-actions'
+import { getInitialData } from '../utils/api'
 
 function Login () {
   const [username, setUsername] = React.useState('')
@@ -11,7 +12,7 @@ function Login () {
   const user = useSelector(state => state.users)
 
   React.useEffect(() => {
-    if (user.authed) {
+    if (user._id) {
       history.push('/')
     }
   }, [user])
