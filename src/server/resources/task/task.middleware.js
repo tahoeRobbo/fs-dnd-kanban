@@ -1,8 +1,6 @@
 import { generateId } from '../../utils/helpers'
-import mongoose from 'mongoose'
 
 export function formatNewTask (req, res, next) {
-  console.log('req.user inside formatNewTask', req.user)
   req.body = {
     name: req.body.name,
     id: generateId(),

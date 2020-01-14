@@ -1,13 +1,28 @@
-import { defaultState } from './defaultState'
-import { connectDB } from './connect-db'
+import { connectMongoose } from './connect-mongoose'
+import { Task } from './resources/task/task.model'
+import { User } from './resources/user/user.model'
+import { Group } from './resources/group/group.model'
+
+const models = [
+  Task,
+  User,
+  Group
+];
 
 (async function purgeDB () {
-  const db = await connectDB()
+  await connectMongoose()
 
-  for (const collectionName in defaultState) {
-    console.log(`removing documents from ${collectionName}`)
-    await db.collection(collectionName).deleteMany({})
+  try {
+    const promises = models.map(async (model, i) => {
+      console.log(`removing documents from ${models[i]}`)
+      await model.deleteMany({})
+    })
+
+    await Promise.all(promises)
+    console.log('Successfully purged db')
+    process.exit()
+  } catch (e) {
+    console.error(`Failed to purge db \n ${e}`)
+    process.exit()
   }
 })()
-  .then(() => { console.log('Successfully purged db'); process.exit() })
-  .catch((err) => { console.log(`Failed to purge db \n ${err}`); process.exit() })
