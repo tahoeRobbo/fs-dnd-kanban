@@ -1,10 +1,12 @@
 import mongoose from 'mongoose'
+import config from '../../config'
 
 const groupSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true
+      required: true,
+      enum: config.groupNames
     }
   }
 )

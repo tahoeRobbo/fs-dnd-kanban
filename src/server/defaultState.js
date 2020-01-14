@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt'
+import mongoose from 'mongoose'
 
 export const defaultState = {
   users: [
@@ -10,19 +11,13 @@ export const defaultState = {
   ],
   groups: [
     {
-      name: 'To Do',
-      id: 'G1',
-      owner: 'U1'
+      name: 'To Do'
     },
     {
-      name: 'Doing',
-      id: 'G2',
-      owner: 'U1'
+      name: 'Doing'
     },
     {
-      name: 'Done',
-      id: 'G3',
-      owner: 'U1'
+      name: 'Done'
     }
 
   ],

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import config from '../../config'
 
 const taskSchema = new mongoose.Schema({
   name: {
@@ -7,18 +8,14 @@ const taskSchema = new mongoose.Schema({
     trim: true
   },
   group: {
-    type: mongoose.SchemaTypes.ObjectId,
-    ref: 'group',
-    required: true
+    type: String,
+    required: true,
+    enum: config.groupNames,
+    default: 'To Do'
   },
   owner: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'user',
-    required: true
-  },
-  created: {
-    type: Date,
-    default: Date.now,
     required: true
   },
   isComplete: {
@@ -30,6 +27,8 @@ const taskSchema = new mongoose.Schema({
     type: Date,
     required: false
   }
-})
+},
+{ timestamps: true }
+)
 
 export const Task = mongoose.model('task', taskSchema)

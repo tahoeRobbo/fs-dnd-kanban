@@ -1,8 +1,11 @@
 import { defaultState } from './defaultState'
-import { connectDB } from './connect-db'
+import { connectMongoose } from './connect-mongoose'
+import { User } from './resources/user/user.model'
+import { Task } from './resources/task/task.model'
+import { Group } from './resources/group/group.model'
 
 (async function initializeDB () {
-  const db = await connectDB()
+  const db = await connectMongoose()
 
   for (const collectionName in defaultState) {
     console.log(`initializing data in ${collectionName}`)

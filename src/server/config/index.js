@@ -9,7 +9,8 @@ const baseConfig = {
   secrets: {
     jwt: process.env.JWT_SECRET,
     jwtExp: process.env.JWT_EXP
-  }
+  },
+  groupNames: ['To Do', 'Doing', 'Done']
 }
 
 let envConfig = {}

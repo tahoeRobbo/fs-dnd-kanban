@@ -2,12 +2,12 @@ import { generateId } from '../../utils/helpers'
 import mongoose from 'mongoose'
 
 export function formatNewTask (req, res, next) {
+  console.log('req.user inside formatNewTask', req.user)
   req.body = {
     name: req.body.name,
     id: generateId(),
-    group: mongoose.Types.ObjectId(),
-    owner: mongoose.Types.ObjectId(), // todo update once auth implemented,
-    created: Date.now(),
+    group: 'To Do',
+    owner: req.user._id,
     isComplete: false
   }
 
