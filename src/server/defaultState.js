@@ -1,6 +1,6 @@
 export const devUser = [
   {
-    name: 'Dev',
+    username: 'Dev',
     password: 'test'
   }
 ]

@@ -1,10 +1,10 @@
 import express from 'express'
-import { groupController } from './group.controller'
+import { groupCrudControllers } from './group.controller'
 
 const groupRouter = express.Router()
 
 groupRouter
   .route('/')
-  .get(groupController.getAllGroups)
+  .get(groupCrudControllers.getMany)
 
 export default groupRouter

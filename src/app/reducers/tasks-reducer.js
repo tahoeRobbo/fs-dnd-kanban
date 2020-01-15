@@ -12,7 +12,7 @@ export default function tasksReducer (state = [], action) {
     case UPDATE_TASK:
       keys = Object.keys(action.task)
       return state.map((task) => {
-        if (task.id !== action.task.id) {
+        if (task._id !== action.task._id) {
           return task
         }
         const updates = {}

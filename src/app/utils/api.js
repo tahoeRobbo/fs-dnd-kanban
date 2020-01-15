@@ -1,52 +1,71 @@
 const url = 'http://localhost:8888'
+const headers = {
+  'Content-Type': 'application/json'
+}
+const authHeader = {
+  Authorization: `Bearer ${window.localStorage.getItem('token')}`
+}
 
 function _fetchData (type) {
-  return window.fetch(`${url}/${type}`)
+  return window.fetch(`${url}/api/${type}`, {
+    method: 'GET',
+    headers: {
+      ...headers,
+      ...authHeader
+    }
+  })
     .then((res) => res.json())
-    .then((data) => data)
+    .then(({ data }) => {
+      return data
+    })
     .catch((err) => err)
+}
+
+export function getGroups () {
+  return _fetchData('group')
 }
 
 export function getInitialData () {
   return Promise.all([
-    _fetchData('groups'),
-    _fetchData('tasks')
+    _fetchData('group'),
+    _fetchData('task')
   ])
     .then(([groups, tasks]) => ({ groups, tasks }))
     .catch((err) => err)
 }
 
 export function postNewTask (name) {
-  const payload = JSON.stringify({ taskName: name })
-  return window.fetch(`${url}/task/new`, {
+  const payload = JSON.stringify({ name })
+  return window.fetch(`${url}/api/task/`, {
     method: 'POST',
     mode: 'cors',
     headers: {
-      'content-type': 'application/json'
+      ...headers,
+      ...authHeader
     },
     body: payload
   })
 }
 
-export function postUpdateTask (task) {
-  console.log('task inside postUpdateTask', task)
+export function postUpdateTask ({ task }) {
   const payload = JSON.stringify(task)
-  return window.fetch(`${url}/task/update`, {
-    method: 'POST',
+  return window.fetch(`${url}/api/task/${task._id}`, {
+    method: 'PUT',
     mode: 'cors',
     headers: {
-      'content-type': 'application/json'
+      ...headers,
+      ...authHeader
     },
     body: payload
   })
 }
 
-export function getAuth (credentials) {
-  return window.fetch(`${url}/auth`, {
+export function signin (credentials) {
+  return window.fetch(`${url}/signin`, {
     method: 'POST',
     mode: 'cors',
     headers: {
-      'content-type': 'application/json'
+      ...headers
     },
     body: JSON.stringify(credentials)
   })

@@ -1,14 +1,4 @@
-import { getAllFromCollection } from '../../utils/crud'
+import { crudControllers } from '../../utils/crud'
+import { Group } from './group.model'
 
-export const groupController = {
-  getAllGroups
-}
-
-export async function getAllGroups (req, res) {
-  try {
-    const groups = await getAllFromCollection('groups')
-    res.status(200).send(groups)
-  } catch (err) {
-    console.error(err)
-  }
-}
+export const groupCrudControllers = crudControllers(Group)
