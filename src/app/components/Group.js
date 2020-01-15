@@ -12,7 +12,6 @@ function Group ({ group }) {
 
   const handleDragOver = (e) => {
     e.preventDefault()
-    console.log('test')
   }
 
   const handleDrop = (e) => {
