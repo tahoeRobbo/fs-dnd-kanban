@@ -17,9 +17,11 @@ function Group ({ group }) {
   }
 
   const handleDrop = (e) => {
-    const id = e.dataTransfer.getData('id')
+    console.log('e.dataTransfer', e.dataTransfer)
+    const _id = e.dataTransfer.getData('_id')
+
     const task = {
-      id,
+      _id,
       group: group.name
     }
     dispatch(handleUpdateTask({ task }))

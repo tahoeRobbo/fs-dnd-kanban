@@ -9,9 +9,11 @@ import { handleGetInitialData } from '../actions/shared'
 function Dashboard () {
   const dispatch = useDispatch()
   const user = useSelector(state => state.users)
-  React.useEffect(() => {
-    dispatch(handleGetInitialData())
-  }, [user])
+  if (user._id) {
+    React.useEffect(() => {
+      dispatch(handleGetInitialData())
+    }, [user])
+  }
 
   const { groups } = useSelector(store => store)
 
