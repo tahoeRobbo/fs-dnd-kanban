@@ -15,7 +15,6 @@ export function handleUpdateTask (task) {
 }
 
 function updateTask (task) {
-
   return {
     type: UPDATE_TASK,
     task

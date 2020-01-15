@@ -4,20 +4,18 @@ import { useSelector, useDispatch } from 'react-redux'
 import { handleUpdateTask } from '../actions/tasks-actions'
 
 import Task from './Task'
-
 function Group ({ group }) {
   const { name } = group
   const { tasks } = useSelector(store => store)
   const dispatch = useDispatch()
-
   const tasksInGroup = tasks.filter((task) => task.group === name)
 
   const handleDragOver = (e) => {
     e.preventDefault()
+    console.log('test')
   }
 
   const handleDrop = (e) => {
-    console.log('e.dataTransfer', e.dataTransfer)
     const _id = e.dataTransfer.getData('_id')
 
     const task = {

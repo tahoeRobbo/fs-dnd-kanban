@@ -22,7 +22,7 @@ function verifyToken (token) {
 
 export async function signup (req, res) {
   if (!req.body.username || !req.body.password) {
-    return res.status(400).json({ message: 'Must have username and password'})
+    return res.status(400).json({ message: 'Must have username and password' })
   }
 
   try {

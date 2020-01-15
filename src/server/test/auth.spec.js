@@ -1,4 +1,4 @@
-import {getUserData} from '../routes/auth-routes'
+import { getUserData } from '../routes/auth-routes'
 
 async function test () {
   await getUserData('Rob')

@@ -4,8 +4,7 @@ import PropTypes from 'prop-types'
 function Task ({ task }) {
   const { name, _id } = task
 
-  const handleDragStart = (e, id) => {
-    console.log('task in handleDragStart', id)
+  const handleDragStart = (e) => {
     e.dataTransfer.setData('_id', _id)
   }
   return (
