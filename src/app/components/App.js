@@ -1,19 +1,12 @@
 import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { Provider, useDispatch } from 'react-redux'
+import { Provider } from 'react-redux'
 import { store } from '../store'
-
-import { handleGetInitialData } from '../actions/shared'
 
 import Dashboard from './Dashboard'
 import Login from './Login'
 
 function App () {
-  const dispatch = useDispatch()
-  React.useEffect(() => {
-    dispatch(handleGetInitialData())
-  }, [])
-
   return (
     <Router>
       <Provider store={store}>

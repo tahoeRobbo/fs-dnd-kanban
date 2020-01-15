@@ -7,7 +7,9 @@ export function handleUpdateTask (task) {
   return (dispatch) => {
     postUpdateTask(task)
       .then((res) => res.json())
-      .then((task) => dispatch(updateTask(task)))
+      .then(({ data }) => {
+        dispatch(updateTask(data))
+      })
       .catch((err) => console.log(`Failed to update task, ${err}`))
   }
 }
@@ -23,7 +25,7 @@ export function handleAddTask (name) {
   return (dispatch) => {
     postNewTask(name)
       .then((res) => res.json())
-      .then((task) => dispatch(addTask(task)))
+      .then(({ data }) => dispatch(addTask(data)))
       .catch((err) => console.log(`Failed to post new task, ${err}`))
   }
 }

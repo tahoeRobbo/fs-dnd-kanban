@@ -1,20 +1,21 @@
-import { getAuth } from '../utils/api'
+import { signin } from '../utils/api'
 
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
 
 export function handleLogin (credentials) {
   return (dispatch) => {
-    getAuth(credentials)
+    signin(credentials)
       .then((res) => res.json())
-      .then((user) => {
-        if (user.authed) {
-          dispatch(login(user))
-          return 'returned from handleLogin'
-        }
-        return dispatch(logout())
+      .then(({ user, token }) => {
+        window.localStorage.setItem('token', token)
+        dispatch(login(user))
       })
-      .catch(err => new Error(`fucked up in handleLogin, ${err}`))
+      .catch(err => {
+        window.localStorage.removeItem('token')
+        console.error(err)
+        dispatch(logout())
+      })
   }
 }
 

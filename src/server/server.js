@@ -1,67 +1,42 @@
 import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
-import { connectDB } from './connect-db'
-import { formatNewTask } from './utils/helpers'
+import morgan from 'morgan'
 
-import tasksRouter from './routes/task-routes'
-import groupsRouter from './routes/group-routes'
-import authRouter from './routes/auth-routes'
+import { connectMongoose } from './connect-mongoose'
 
-const port = process.env.PORT || 8888
+import taskRouter from './resources/task/task.routes'
+import groupRouter from './resources/group/group.routes'
+import userRouter from './resources/user/user.routes'
+
+import { protect, signin, signup } from './utils/auth'
+
+const port = process.env.PORT || 8001
 
 const app = express()
-
-app.listen(port, () => console.log(`server listening on port ${port}`))
-
-export async function addNewTask (name) {
-  const db = await connectDB()
-  const collection = db.collection('tasks')
-  const formattedTask = formatNewTask(name)
-  await collection.insertOne(formattedTask)
-  return formattedTask
-}
-
-export async function getCollectionData (collectionName) {
-  const db = await connectDB()
-  return db.collection(collectionName).find({}).toArray()
-}
 
 app.use(
   cors(),
   bodyParser.urlencoded({ extended: true }),
-  bodyParser.json()
+  bodyParser.json(),
+  morgan('dev')
 )
 
-export async function updateTask (task) {
-  const { id, name, group, isComplete } = task
-  const collection = await connectDB().collection('tasks')
+app.use('/signup', signup)
+app.use('/signin', signin)
 
-  if (group) {
-    await collection.updateOne({ id }, { $set: { group } })
+app.use('/api', protect)
+app.use('/api/group', groupRouter)
+app.use('/api/task', taskRouter)
+app.use('api/user', userRouter)
+
+export async function start () {
+  try {
+    await connectMongoose()
+    app.listen(port, () => {
+      console.log(`React DND server connected on http://localhost:${port}`)
+    })
+  } catch (e) {
+    console.error(e)
   }
-
-  if (name) {
-    await collection.updateOne({ id }, { $set: { name } })
-  }
-
-  if (isComplete !== undefined) {
-    const completed = Date.now()
-    await collection.updateOne(
-      { id },
-      {
-        $set: {
-          isComplete,
-          completed
-        }
-      })
-      .then(() => { task.completed = completed })
-  }
-
-  return task
 }
-
-app.use('/', tasksRouter)
-app.use('/', groupsRouter)
-app.use('/task', tasksRouter)
-app.use('/auth', authRouter)

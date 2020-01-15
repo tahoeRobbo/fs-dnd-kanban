@@ -11,7 +11,7 @@ function Login () {
   const user = useSelector(state => state.users)
 
   React.useEffect(() => {
-    if (user.authed) {
+    if (user._id) {
       history.push('/')
     }
   }, [user])
@@ -42,8 +42,6 @@ function Login () {
         />
         <button type='submit'>Login</button>
       </form>
-
-
     </>
   )
 }
