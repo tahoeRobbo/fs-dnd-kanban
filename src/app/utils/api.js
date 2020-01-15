@@ -1,16 +1,30 @@
 const url = 'http://localhost:8888'
+const token = window.localStorage.getItem('token')
 
 function _fetchData (type) {
-  return window.fetch(`${url}/${type}`)
+  return window.fetch(`${url}/api/${type}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    }
+  })
     .then((res) => res.json())
-    .then((data) => data)
+    .then(({ data }) => {
+      console.log('data from fetchData', data)
+      return data
+    })
     .catch((err) => err)
+}
+
+export function getGroups () {
+  return _fetchData('group')
 }
 
 export function getInitialData () {
   return Promise.all([
-    _fetchData('groups'),
-    _fetchData('tasks')
+    _fetchData('group'),
+    _fetchData('task')
   ])
     .then(([groups, tasks]) => ({ groups, tasks }))
     .catch((err) => err)
