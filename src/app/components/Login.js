@@ -12,9 +12,9 @@ function Login () {
 
   React.useEffect(() => {
     if (user._id) {
-      history.push('/')
+      history.push('/dashboard')
     }
-  }, [user])
+  }, [user._id])
 
   function handleSubmit (e) {
     e.preventDefault()

@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import PrivateRoute from './PrivateRoute'
 import { Provider } from 'react-redux'
 import { store } from '../store'
 
@@ -12,7 +13,7 @@ function App () {
       <Provider store={store}>
         <div className='min-h-full'>
           <div className='px-24 py-10'>
-            <Route path='/' exact component={Dashboard} />
+            <PrivateRoute path='/dashboard' exact component={Dashboard} />
             <Route path='/login' component={Login} />
           </div>
         </div>

@@ -19,7 +19,10 @@ module.exports = {
     })
   ],
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    watchOptions: {
+      ignored: /dist/
+    }
   },
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development'
 }
