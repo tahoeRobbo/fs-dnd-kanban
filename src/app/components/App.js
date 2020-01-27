@@ -6,6 +6,7 @@ import { store } from '../store'
 
 import Dashboard from './Dashboard'
 import Login from './Login'
+import Nav from './Nav'
 
 function App () {
   return (
@@ -13,6 +14,7 @@ function App () {
       <Provider store={store}>
         <div className='min-h-full'>
           <div className='px-24 py-10'>
+            <Nav />
             <PrivateRoute path='/dashboard' exact component={Dashboard} />
             <Route path='/login' component={Login} />
           </div>

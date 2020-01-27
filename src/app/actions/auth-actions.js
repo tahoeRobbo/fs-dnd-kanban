@@ -26,7 +26,8 @@ function login (user) {
   }
 }
 
-function logout () {
+export function logout () {
+  window.localStorage.removeItem('token')
   return {
     type: LOGOUT
   }

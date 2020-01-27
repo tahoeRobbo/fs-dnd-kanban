@@ -26,7 +26,7 @@ function Group ({ group }) {
 
   return (
     <div
-      className='w-full bg-blue-300 text-center mr-2'
+      className='w-full bg-blue-300 text-center m-2'
       onDragOver={(e) => handleDragOver(e)}
       onDrop={(e) => handleDrop(e)}
     >

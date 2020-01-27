@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 
 function useLoggedIn () {
-  const [loggedIn, setLoggedIn] = useState(null)
+  const [loggedIn, setLoggedIn] = useState(window.localStorage.getItem('token'))
 
   useEffect(() => {
     setLoggedIn(window.localStorage.getItem('token'))
@@ -10,4 +10,3 @@ function useLoggedIn () {
   return loggedIn
 }
 export default useLoggedIn
-
