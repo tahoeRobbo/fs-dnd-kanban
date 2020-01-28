@@ -2,19 +2,22 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { handleLogin } from '../actions/auth-actions'
+import useLoggedIn from '../hooks/useLoggedIn'
 
 function Login () {
   const [username, setUsername] = React.useState('')
   const [password, setPassword] = React.useState('')
+  const loggedIn = useLoggedIn()
   const history = useHistory()
   const dispatch = useDispatch()
-  const user = useSelector(state => state.users)
+
+  const inputStyles = ['border', 'border-blue-300'].join(' ')
 
   React.useEffect(() => {
-    if (user._id) {
-      history.push('/')
+    if (loggedIn) {
+      history.push('/dashboard')
     }
-  }, [user])
+  }, [loggedIn])
 
   function handleSubmit (e) {
     e.preventDefault()
@@ -31,6 +34,7 @@ function Login () {
           value={username}
           name='login'
           placeholder='username'
+          className={inputStyles}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
@@ -38,6 +42,7 @@ function Login () {
           value={password}
           name='password'
           placeholder='password'
+          className={inputStyles}
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type='submit'>Login</button>

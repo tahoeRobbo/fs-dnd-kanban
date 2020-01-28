@@ -1,9 +1,12 @@
+import { loadLocalStorage } from './localStorage'
+
+const token = loadLocalStorage('user') && loadLocalStorage('user').token
 const url = 'http://localhost:8888'
 const headers = {
   'Content-Type': 'application/json'
 }
 const authHeader = {
-  Authorization: `Bearer ${window.localStorage.getItem('token')}`
+  Authorization: `Bearer ${token}`
 }
 
 function _fetchData (type) {

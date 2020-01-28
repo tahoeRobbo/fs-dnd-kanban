@@ -1,4 +1,5 @@
 import { signin } from '../utils/api'
+import { removeLocalStorage, saveLocalStorage } from '../utils/localStorage'
 
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
@@ -7,26 +8,26 @@ export function handleLogin (credentials) {
   return (dispatch) => {
     signin(credentials)
       .then((res) => res.json())
-      .then(({ user, token }) => {
-        window.localStorage.setItem('token', token)
-        dispatch(login(user))
+      .then(({ token }) => {
+        saveLocalStorage('user', { token })
+        dispatch(login(token))
       })
       .catch(err => {
-        window.localStorage.removeItem('token')
         console.error(err)
         dispatch(logout())
       })
   }
 }
 
-function login (user) {
+function login (token) {
   return {
     type: LOGIN,
-    user
+    token
   }
 }
 
-function logout () {
+export function logout () {
+  removeLocalStorage('user')
   return {
     type: LOGOUT
   }
