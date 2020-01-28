@@ -4,8 +4,6 @@ import useLoggedIn from '../hooks/useLoggedIn'
 
 function PrivateRoute ({ component: Component, ...rest }) {
   const loggedIn = useLoggedIn()
-
-  console.log('loggedIn from PrivateRoute', loggedIn)
   return (
     <Route {...rest} render={props => (
       loggedIn
