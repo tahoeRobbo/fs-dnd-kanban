@@ -73,3 +73,14 @@ export function signin (credentials) {
     body: JSON.stringify(credentials)
   })
 }
+
+export function signup (credentials) {
+  return window.fetch(`${url}/signup`, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      ...headers
+    },
+    body: JSON.stringify(credentials)
+  })
+}
