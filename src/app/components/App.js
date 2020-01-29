@@ -4,6 +4,7 @@ import PrivateRoute from './PrivateRoute'
 
 import Dashboard from './Dashboard'
 import Login from './Login'
+import SignUp from './SignUp'
 import Nav from './Nav'
 
 function App () {
@@ -14,6 +15,7 @@ function App () {
             <Nav />
             <PrivateRoute path='/dashboard' exact component={Dashboard} />
             <Route path='/login' component={Login} />
+            <Route path='/signup' component={SignUp} />
           </div>
         </div>
     </Router>

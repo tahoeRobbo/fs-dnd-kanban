@@ -13,7 +13,6 @@ const models = [
   await connectMongoose()
 
   try {
-    console.log('initializing dev user')
     const dev = await User.create(devUser[0])
     console.log(`success.  dev user -- ${dev}`)
 

@@ -1,15 +1,23 @@
 import { loadLocalStorage } from './localStorage'
 
-const token = loadLocalStorage('user') && loadLocalStorage('user').token
+let authToken = loadLocalStorage('user').token
 const url = 'http://localhost:8888'
 const headers = {
   'Content-Type': 'application/json'
 }
+
 const authHeader = {
-  Authorization: `Bearer ${token}`
+  Authorization: `Bearer ${authToken}`
+}
+
+// for logout -> login as different user, used by setAuthToken middleware
+export function setToken (token) {
+  authHeader.Authorization = `Bearer ${token}`
+  authToken = token
 }
 
 function _fetchData (type) {
+  console.log('authHeader', authHeader)
   return window.fetch(`${url}/api/${type}`, {
     method: 'GET',
     headers: {
@@ -22,6 +30,10 @@ function _fetchData (type) {
       return data
     })
     .catch((err) => err)
+}
+
+export function getTasks () {
+  return _fetchData('task')
 }
 
 export function getGroups () {
@@ -65,6 +77,17 @@ export function postUpdateTask ({ task }) {
 
 export function signin (credentials) {
   return window.fetch(`${url}/signin`, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      ...headers
+    },
+    body: JSON.stringify(credentials)
+  })
+}
+
+export function signup (credentials) {
+  return window.fetch(`${url}/signup`, {
     method: 'POST',
     mode: 'cors',
     headers: {

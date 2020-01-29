@@ -1,4 +1,4 @@
-import { signin } from '../utils/api'
+import { signin, signup } from '../utils/api'
 import { removeLocalStorage, saveLocalStorage } from '../utils/localStorage'
 
 export const LOGIN = 'LOGIN'
@@ -23,6 +23,20 @@ function login (token) {
   return {
     type: LOGIN,
     token
+  }
+}
+
+export function handleSignUp (credentials) {
+  return (dispatch) => {
+    signup(credentials).then((res) => res.json())
+      .then(({ token }) => {
+        saveLocalStorage('user', { token })
+        dispatch(login(token))
+      })
+      .catch(err => {
+        console.error(err)
+        dispatch(logout())
+      })
   }
 }
 

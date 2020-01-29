@@ -19,8 +19,7 @@ export const getOne = model => async (req, res) => {
 export const getMany = model => async (req, res) => {
   try {
     const docs = await model
-      // .find({ owner: req.user._id }) // todo add with auth
-      .find({})
+      .find({ owner: req.user._id })
       .lean()
       .exec()
 
@@ -36,10 +35,9 @@ export const getMany = model => async (req, res) => {
 }
 
 export const createOne = model => async (req, res) => {
-  // const owner = req.user._id
+  const owner = req.user._id
   try {
-    // const doc = await model.create({ ...req.body, owner })
-    const doc = await model.create({ ...req.body })
+    const doc = await model.create({ ...req.body, owner })
 
     if (!doc) {
       return res.status(400).end()

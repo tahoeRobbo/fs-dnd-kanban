@@ -1,11 +1,14 @@
-import { ADD_TASK, UPDATE_TASK } from '../actions/tasks-actions'
+import { ADD_TASK, SET_TASKS, UPDATE_TASK } from '../actions/tasks-actions'
 import { SET_INITIAL_DATA } from '../actions/shared'
+import { LOGOUT } from '../actions/auth-actions'
 let keys
 
 export default function tasksReducer (state = [], action) {
   switch (action.type) {
     case SET_INITIAL_DATA:
       return action.data.tasks
+    case SET_TASKS:
+      return action.tasks
     case ADD_TASK:
       return state.concat([action.task])
 
@@ -24,6 +27,8 @@ export default function tasksReducer (state = [], action) {
           ...updates
         }
       })
+    case LOGOUT:
+      return []
     default:
       return state
   }

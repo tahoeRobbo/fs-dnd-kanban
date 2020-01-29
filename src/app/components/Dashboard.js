@@ -3,23 +3,26 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import Group from './Group'
 import AddTodo from './AddTodo'
-import { handleGetInitialData } from '../actions/shared'
+import useLoggedIn from '../hooks/useLoggedIn'
+
+import { handleGetTasks } from '../actions/tasks-actions'
 
 function Dashboard () {
   const dispatch = useDispatch()
-  const user = useSelector(state => state.users)
+  const loggedIn = useLoggedIn()
+  const { groups } = useSelector(store => store)
 
   React.useEffect(() => {
-    dispatch(handleGetInitialData())
-  }, [user])
-
-  const { groups } = useSelector(store => store)
+    if (loggedIn) {
+      dispatch(handleGetTasks())
+    }
+  }, [loggedIn])
 
   return (
     <>
       <div className='flex flex-row justify-between'>
         {groups.length > 0 && groups.map((group) => (
-          <Group key={group._id} group={group} />
+          <Group key={group.id} group={group} />
         ))}
       </div>
       <AddTodo />
