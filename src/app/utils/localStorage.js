@@ -20,6 +20,6 @@ export function saveLocalStorage (key, state) {
   }
 }
 
-export function removeLocalStorage(key) {
+export function removeLocalStorage (key) {
   window.localStorage.removeItem(key)
 }

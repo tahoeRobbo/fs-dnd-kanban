@@ -1,7 +1,25 @@
-import { postNewTask, postUpdateTask } from '../utils/api'
+import { getTasks, postNewTask, postUpdateTask } from '../utils/api'
 
 export const UPDATE_TASK = 'UPDATE_TASK'
 export const ADD_TASK = 'ADD_TASK'
+export const SET_TASKS = 'SET_TASKS'
+
+export function handleGetTasks () {
+  return (dispatch) => {
+    getTasks()
+      .then((tasks) => {
+        dispatch(setTasks(tasks))
+      })
+      .catch((err) => console.log(`Failed to get task, ${err}`))
+  }
+}
+
+function setTasks (tasks) {
+  return {
+    type: SET_TASKS,
+    tasks
+  }
+}
 
 export function handleUpdateTask (task) {
   return (dispatch) => {
