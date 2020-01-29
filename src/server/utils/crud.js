@@ -19,12 +19,9 @@ export const getOne = model => async (req, res) => {
 export const getMany = model => async (req, res) => {
   try {
     const docs = await model
-      .find({ owner: req.user._id }) // todo add with auth
+      .find({ owner: req.user._id })
       .lean()
       .exec()
-
-    console.log('req.user._id', req.user._id)
-    console.log('docs', docs)
 
     if (!docs) {
       return res.status(400).end()
@@ -41,7 +38,6 @@ export const createOne = model => async (req, res) => {
   const owner = req.user._id
   try {
     const doc = await model.create({ ...req.body, owner })
-    // const doc = await model.create({ ...req.body })
 
     if (!doc) {
       return res.status(400).end()

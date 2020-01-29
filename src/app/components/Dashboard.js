@@ -14,10 +14,7 @@ function Dashboard () {
 
   React.useEffect(() => {
     if (loggedIn) {
-      console.log('loggedIn', loggedIn)
-      setTimeout(() => {
-        dispatch(handleGetTasks())
-      }, 50)
+      dispatch(handleGetTasks())
     }
   }, [loggedIn])
 

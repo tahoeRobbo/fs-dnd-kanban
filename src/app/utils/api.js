@@ -10,11 +10,10 @@ const authHeader = {
   Authorization: `Bearer ${authToken}`
 }
 
-// for logout -> login as different user
+// for logout -> login as different user, used by setAuthToken middleware
 export function setToken (token) {
   authHeader.Authorization = `Bearer ${token}`
   authToken = token
-
 }
 
 function _fetchData (type) {
